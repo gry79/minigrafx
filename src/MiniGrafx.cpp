@@ -503,11 +503,11 @@ void inline MiniGrafx::drawInternal(int16_t xMove, int16_t yMove, int16_t width,
   for (uint16_t i = 0; i < bytesInData; i++) {
     byte currentByte = readFontData(data, offset + i);
 
+    uint16_t pixelX = (i / arrayHeight);
+    uint16_t pixelY = (i % arrayHeight) * 8;
+
     for (int b = 0; b < 8; b++) {
-      if(bitRead(currentByte, b)) {
-        uint16_t currentBit = i * 8 + b;
-        uint16_t pixelX = (i / arrayHeight);
-        uint16_t pixelY = (i % arrayHeight) * 8;
+      if (bitRead(currentByte, b)) {
         setPixel(pixelX + xMove, pixelY + yMove + b);
       }
     }
